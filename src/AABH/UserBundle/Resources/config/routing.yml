@@ -1,0 +1,29 @@
+aabh_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AABHUserBundle:Default:index }
+
+aabh_user_index:
+    path:     /user/index
+    defaults: { _controller: AABHUserBundle:User:index}
+    
+aabh_user_articulo:
+    path:     /user/articulos/{page}
+    defaults: { _controller: AABHUserBundle:User:articulos, page: 1 }
+    requirements: 
+        page: \d+
+        
+aabh_user_add:
+    path:     /user/add
+    defaults: { _controller: AABHUserBundle:User:add}
+    
+aabh_user_edit:
+    path:     /user/edit/{id}
+    defaults: { _controller: AABHUserBundle:User:edit}
+    
+aabh_user_view:
+    path:     /user/view/{id}
+    defaults: { _controller: AABHUserBundle:User:view}
+    
+aabh_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: AABHUserBundle:User:delete}

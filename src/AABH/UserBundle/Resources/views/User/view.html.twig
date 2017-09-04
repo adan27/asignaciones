@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h2>Users</h2>
+    
+    <table border="1">
+        <tr>
+            <th>UserName</th>
+            <th>FirtName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.firtsName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <!--td> user.role </td-->
+            <td>
+                {% if user.role== 'ROLE_ADMIN' %}
+                    <strong>Administrador</strong>
+                {% elseif user.role == 'ROLE_USER'%}
+                    <strong>Usuario</strong>
+                {% endif %}
+            </td>
+            <td>{{ user.createdAt|date('d-m-Y') }}</td>
+            <td>{{ user.updatedAt|date('Y-m-d H:m:s') }}</td>
+            <td>
+                <a href="#">View</a>
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>    
+{% endblock %}

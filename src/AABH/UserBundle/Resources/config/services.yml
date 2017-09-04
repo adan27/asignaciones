@@ -1,0 +1,4 @@
+services:
+#    aabh_user.example:
+#        class: AABH\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
