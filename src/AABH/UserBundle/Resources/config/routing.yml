@@ -11,10 +11,15 @@ aabh_user_articulo:
     defaults: { _controller: AABHUserBundle:User:articulos, page: 1 }
     requirements: 
         page: \d+
-        
+
 aabh_user_add:
     path:     /user/add
     defaults: { _controller: AABHUserBundle:User:add}
+
+aabh_user_create:
+    path:     /user/create
+    defaults: { _controller: AABHUserBundle:User:create}
+    methods: POST
     
 aabh_user_edit:
     path:     /user/edit/{id}
