@@ -32,3 +32,10 @@ aabh_user_view:
 aabh_user_delete:
     path:     /user/delete/{id}
     defaults: { _controller: AABHUserBundle:User:delete}
+    
+aabh_user_redirect_add:
+    path:    /user/create
+    defaults: 
+        _controller: AABHUserBundle:User:add
+        path: /user/add
+        permanent: true

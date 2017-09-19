@@ -4,12 +4,16 @@ namespace AABH\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; /*Esta linea es para que los registros a introducir sean unicos en la base y no se corra el riesgo de duplicados y el la cabecera de la clase se debera de llamar al constraine @UniqueEntity("campoquesevalidara")*/
 
 /**
  * User
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AABH\UserBundle\Entity\UserRepository")
+ * @UniqueEntity("username", message="Este Usuario ya ah sido seleccionado anteriormente")
+ * @UniqueEntity("email")
  * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
@@ -27,6 +31,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=50)
+     * @Assert\NotBlank(message = "user.username.not_blank")
      */
     private $username;
 
@@ -34,6 +39,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="firts_name", type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $firtsName;
 
@@ -41,6 +47,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $lastName;
 
@@ -48,6 +55,11 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     * message = "El email '{{ value }}' no es valido.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -55,6 +67,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $password;
 
@@ -62,6 +75,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="role", type="string", columnDefinition="ENUM('ROLE_ADMIN', 'ROLE_USER')", length=50)
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices = {"ROLE_ADMIN", "ROLE_USER"})
      */
     private $role;
 

@@ -11,13 +11,22 @@ use AABH\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $ab=$this->getDoctrine()->getManager();
         
-        $users = $ab->getRepository('AABHUserBundle:User')->findall();
+        $dql = "Select u FROM AABHUserBundle:User u";
+        $users = $ab->createQuery($dql);
         
-        /* $res = 'Lista de Usuarios: <br/>';
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $users, $request->query->getInt('page', 1),
+            5
+            );
+        
+        /*$users = $ab->getRepository('AABHUserBundle:User')->findall();
+        
+         $res = 'Lista de Usuarios: <br/>';
         
         foreach($users as $user){
             $res .= 'Usuario: ' .$user->getUsername() . ' - Email: ' .$user->getEmail(). '<br/>';
@@ -25,7 +34,8 @@ class UserController extends Controller
         
         return new Response($res);*/
         
-        return $this->render('AABHUserBundle:User:index.html.twig', array('users'=>$users));
+       // return $this->render('AABHUserBundle:User:index.html.twig', array('users'=>$users));
+       return $this->render('AABHUserBundle:User:index.html.twig', array('pagination'=>$pagination));
     }
     
          public function viewAction($id){
@@ -72,6 +82,10 @@ class UserController extends Controller
             $ab = $this->getDoctrine()->getManager();
             $ab->persist($user);
             $ab->flush();
+            
+            $messa = $this->get('translator')->trans('The user has bee created.');
+            
+            $this->addFlash('mensaje',$messa);
             
             return $this->redirectToRoute('aabh_user_index');
         }
