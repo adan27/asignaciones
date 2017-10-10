@@ -1,41 +1,88 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h2>Users</h2>
-    
-    <table border="1">
-        <tr>
-            <th>UserName</th>
-            <th>FirtName</th>
-            <th>LastName</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Actions</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.firtsName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
-            <!--td> user.role </td-->
-            <td>
-                {% if user.role== 'ROLE_ADMIN' %}
-                    <strong>Administrador</strong>
-                {% elseif user.role == 'ROLE_USER'%}
-                    <strong>Usuario</strong>
-                {% endif %}
-            </td>
-            <td>{{ user.createdAt|date('d-m-Y') }}</td>
-            <td>{{ user.updatedAt|date('Y-m-d H:m:s') }}</td>
-            <td>
-                <a href="#">View</a>
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>    
-{% endblock %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>{{ user.firtsName }} {{ user.lastName }}</h2> 
+	        <br>
+	        <dl>
+	            <dt>{{'Username'|trans}}</dt>
+	            <dd>
+	                {{ user.username }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Firts name'|trans}}</dt>
+	            <dd>
+	                {{ user.firtsName }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Last name'|trans}}</dt>
+	            <dd>
+	                {{ user.lastName }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Email'|trans}}</dt>
+	            <dd>
+	                {{ user.email }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Role'|trans}}</dt>
+	            <dd>
+                	{% if user.role == 'ROLE_ADMIN' %}
+						{% trans %}Administrator{% endtrans %}
+					{% elseif user.role == 'ROLE_USER' %}
+						{% trans %}User{% endtrans %}
+                	{% endif %}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Active'|trans}}</dt>
+	            <dd>
+                	{% if user.isActive == 1 %}
+						<span class="text-success">{% trans %}Enabled{% endtrans %}</span>
+					{% elseif user.isActive == 0 %}
+						<span class="text-warning">{% trans %}Disabled{% endtrans %}</span>
+                	{% endif %}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Created'|trans}}</dt>
+	            <dd>
+	                {{ user.createdAt|date('d-m-Y H:i') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Updated'|trans}}</dt>
+	            <dd>
+	                {{ user.updatedAt|date('d-m-Y H:i') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	    	<h3>{{ 'Actions'|trans }}:</h3>
+			<p>
+		    	<a href="{{ path('aabh_user_edit', { id: user.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	{{ 'Edit User'|trans }}
+				 </a>
+			</p>
+			<p>
+			    {{ include ('AABHUserBundle:User:forms/form.html.twig', {form: delete_form, message: 'Are you sure ?'|trans}) }}
+			</p>
+	    </div>
+	</div>
+{% endblock %}	

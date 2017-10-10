@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+  
+{% block body %}
+    {{ parent() }}
+    {{ include('AABHUserBundle:User:messages/success.html.twig')}}
+ 	<div class="main container">
+ 		<div class="row well">
+ 		    <div class="col-md-6">
+ 		        <div class="page-header">
+ 				      <h2>{% trans %}Edit User{% endtrans %}</h2>
+ 			      </div>
+ 			      {{ form_start(form, {'attr' : {'novalidate': 'novalidate', 'role' : 'form'} }) }}
+ 			          <h4 class="text-danger"> {{ form_errors(form) }} </h4>
+ 			          
+ 			          <fieldset>
+         			      <div class="form-group">
+         			        {{ form_label(form.username) }}
+         			        {{ form_widget(form.username, {'attr' : {'class' : 'form-control', 'placeholder' : 'Your username'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.username) }}</spam>
+         			      </div>
+         			      <div class="form-group">
+         			        {{ form_label(form.firtsName) }}
+         			        {{ form_widget(form.firtsName, {'attr' : {'class' : 'form-control', 'placeholder' : 'Firts Name'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.firtsName) }}</spam>
+         			      </div>
+         			      <div class="form-group">
+         			        {{ form_label(form.lastName) }}
+         			        {{ form_widget(form.lastName, {'attr' : {'class' : 'form-control', 'placeholder' : 'Last Name'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.lastName) }}</spam>
+         			      </div>
+         			      <div class="form-group">
+         			        {{ form_label(form.email) }}
+         			        {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Your email'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.email) }}</spam>
+         			      </div>
+         			      <div class="form-group">
+         			        {{ form_label(form.password) }}
+         			        {{ form_widget(form.password, {'attr' : {'class' : 'form-control', 'placeholder' : 'Your Password'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.password) }}</spam>
+         			      </div>
+         			      <div class="form-group">
+         			        {{ form_label(form.role) }}
+         			        {{ form_widget(form.role, {'attr' : {'class' : 'form-control', '<placehol>    </placehol>der' : 'Your role'}}) }}
+         			        <spam class="text-danger">{{ form_errors(form.role) }}</spam>
+         			      </div>
+         			      <div class="checkbox">
+         			        <label>
+         			            {{ form_widget(form.isActive) }}{% trans %}Active{% endtrans %}
+         			            <spam class="text-danger">{{ form_errors(form.isActive) }}</spam>
+         			        </label>
+         			      </div>
+         			  </fieldset>
+ 			      
+     			      <p>
+     			        {{ form_widget(form.guardar, {'label' : 'Update User', 'attr' : {'class' : 'btn btn-success'}}) }}
+     			      </p>
+ 			      
+ 			      {{ form_end(form) }}
+ 		    </div>
+ 		</div>
+ 	</div>
+{% endblock %}
+ 			
