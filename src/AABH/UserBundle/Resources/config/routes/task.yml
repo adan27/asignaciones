@@ -1,0 +1,53 @@
+aabh_task_index:
+    path:     /index
+    defaults: { _controller: AABHUserBundle:Task:index }
+
+aabh_task_add:
+    path:     /add
+    defaults: { _controller: AABHUserBundle:Task:add }
+
+aabh_task_create:
+    path:     /create
+    defaults: { _controller: AABHUserBundle:Task:create }
+    methods:  POST
+
+aabh_task_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AABHUserBundle:Task:edit }
+
+aabh_task_update:
+    path:     /update/{id}
+    defaults: { _controller: AABHUserBundle:Task:update }
+    methods:  [POST, PUT]
+
+aabh_task_view:
+    path:     /view/{id}
+    defaults: { _controller: AABHUserBundle:Task:view }
+
+aabh_task_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AABHUserBundle:Task:delete }
+    methods:  [POST, DELETE]
+
+aabh_task_redirect_add:
+    path: /create
+    defaults:
+        _controller: AABHUserBundle:Task:add
+        path: /add
+        permanent: true
+        
+aabh_task_custom:
+    path: /custom
+    defaults: { _controller: AABHUserBundle:Task:custom }
+    
+aabh_task_process:
+    path:     /process/{id}
+    defaults: { _controller: AABHUserBundle:Task:process }
+    methods: [POST, PUT]
+
+aabh_task_redirect_edit:
+    path: /update/{id}
+    defaults:
+        _controller: AABHUserBundle:Task:edit
+        path: /edit/{id}
+        permanent: true

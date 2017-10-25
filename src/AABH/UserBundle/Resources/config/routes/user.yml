@@ -1,0 +1,55 @@
+aabh_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AABHUserBundle:Default:index }
+
+aabh_user_index:
+    path:     /index
+    defaults: { _controller: AABHUserBundle:User:index}
+    
+aabh_user_articulo:
+    path:     /articulos/{page}
+    defaults: { _controller: AABHUserBundle:User:articulos, page: 1 }
+    requirements: 
+        page: \d+
+
+aabh_user_add:
+    path:     /add
+    defaults: { _controller: AABHUserBundle:User:add}
+
+aabh_user_create:
+    path:     /create
+    defaults: { _controller: AABHUserBundle:User:create}
+    methods: POST
+    
+aabh_user_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AABHUserBundle:User:edit}
+
+aabh_user_update:
+    path:     /update/{id}
+    defaults: { _controller: AABHUserBundle:User:update}
+    methods: [POST, PUT]
+    
+aabh_user_view:
+    path:     /view/{id}
+    defaults: { _controller: AABHUserBundle:User:view}
+    
+aabh_user_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AABHUserBundle:User:delete}
+    methods: [POST, DELETE]
+    
+aabh_user_redirect_add:
+    path:    /create
+    defaults: 
+        _controller: AABHUserBundle:User:add
+        path: /add
+        permanent: true
+
+aabh_user_redirect_edit:
+    path:    /update/{id}
+    defaults: 
+        _controller: AABHUserBundle:User:edit
+        path: /edit/{id}
+        permanent: true
+        

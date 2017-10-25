@@ -1,54 +1,24 @@
+aabh_user_user:
+    resource: "@AABHUserBundle/Resources/config/routes/user.yml"
+    prefix: /user
+    
+aabh_task_task:
+    resource: "@AABHUserBundle/Resources/config/routes/task.yml"
+    prefix: /task
+    
+# Autentication
+
 aabh_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: AABHUserBundle:Default:index }
+    path:     /
+    defaults: { _controller: AABHUserBundle:User:home }
 
-aabh_user_index:
-    path:     /user/index
-    defaults: { _controller: AABHUserBundle:User:index}
-    
-aabh_user_articulo:
-    path:     /user/articulos/{page}
-    defaults: { _controller: AABHUserBundle:User:articulos, page: 1 }
-    requirements: 
-        page: \d+
+aabh_user_login:
+    path:     /login
+    defaults: { _controller: AABHUserBundle:Security:login }
 
-aabh_user_add:
-    path:     /user/add
-    defaults: { _controller: AABHUserBundle:User:add}
+aabh_user_login_check:
+    path:     /login_check
+    defaults: { _controller: AABHUserBundle:Security:loginCheck }
 
-aabh_user_create:
-    path:     /user/create
-    defaults: { _controller: AABHUserBundle:User:create}
-    methods: POST
-    
-aabh_user_edit:
-    path:     /user/edit/{id}
-    defaults: { _controller: AABHUserBundle:User:edit}
-
-aabh_user_update:
-    path:     /user/update/{id}
-    defaults: { _controller: AABHUserBundle:User:update}
-    methods: [POST, PUT]
-    
-aabh_user_view:
-    path:     /user/view/{id}
-    defaults: { _controller: AABHUserBundle:User:view}
-    
-aabh_user_delete:
-    path:     /user/delete/{id}
-    defaults: { _controller: AABHUserBundle:User:delete}
-    methods: [POST, DELETE]
-    
-aabh_user_redirect_add:
-    path:    /user/create
-    defaults: 
-        _controller: AABHUserBundle:User:add
-        path: /user/add
-        permanent: true
-
-aabh_user_redirect_edit:
-    path:    /user/update/{id}
-    defaults: 
-        _controller: AABHUserBundle:User:edit
-        path: /user/edit/{id}
-        permanent: true
+aabh_user_logout:
+    path:     /logout
